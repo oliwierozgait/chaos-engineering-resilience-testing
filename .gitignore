@@ -1,0 +1,23 @@
+# --- Terraform Runtime Files ---
+# Local directories created by 'terraform init'
+.terraform/
+.terraform.lock.hcl
+
+# --- Terraform State Files ---
+# These contain the infrastructure state and should never be pushed
+*.tfstate
+*.tfstate.*
+
+# --- Terraform Variables ---
+# Files containing sensitive variable values
+*.tfvars
+*.tfvars.json
+
+# --- Azure CLI Configuration ---
+# Local Azure CLI session and credentials
+.azure/
+
+# --- Operating System Files ---
+# System-specific temporary files
+.DS_Store
+Thumbs.db
