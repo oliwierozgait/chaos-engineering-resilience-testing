@@ -4,6 +4,7 @@
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-purple)](https://www.terraform.io)
 [![Docker](https://img.shields.io/badge/Runtime-Docker-blue)](https://www.docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Terraform Validate](https://github.com/OliwierOzgaIT/azure-serverless-monitoring/actions/workflows/terraform-validate.yml/badge.svg)](https://github.com/OliwierOzgaIT/azure-serverless-monitoring/actions)
 
 An advanced Azure-based laboratory designed to validate cloud resilience through automated fault injection. This project leverages **Infrastructure as Code (IaC)** to deploy a controlled environment where CPU saturation, network latency, and storage exhaustion are systematically simulated to test observability, alerting, and system stability.
 
