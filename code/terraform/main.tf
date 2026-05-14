@@ -86,7 +86,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   # SSH Key configuration for secure access
   admin_ssh_key {
     username   = "chaosuser"
-    public_key = file("C:/Users/qqlka/.ssh/id_rsa.pub")
+    public_key = var.ssh_public_key
   }
 
   os_disk {
@@ -102,4 +102,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
   tags = var.tags
+}
+
+variable "ssh_public_key" {
+  description = "SSH public key for VM access."
+  type        = string
+  default     = ""
 }
