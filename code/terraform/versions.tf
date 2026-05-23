@@ -1,4 +1,3 @@
-# Configure Terraform settings and required providers
 terraform {
   required_version = ">= 1.0.0"
 
@@ -10,7 +9,6 @@ terraform {
   }
 }
 
-# Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
 }

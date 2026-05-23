@@ -4,7 +4,7 @@
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-purple)](https://www.terraform.io)
 [![Docker](https://img.shields.io/badge/Runtime-Docker-blue)](https://www.docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Terraform Validate](https://github.com/OliwierOzgaIT/azure-serverless-monitoring/actions/workflows/terraform-validate.yml/badge.svg)](https://github.com/OliwierOzgaIT/azure-serverless-monitoring/actions)
+[![Terraform Validate](https://github.com/OliwierOzgaIT/chaos-engineering-resilience-testing/actions/workflows/terraform-validate.yml/badge.svg)](https://github.com/OliwierOzgaIT/chaos-engineering-resilience-testing/actions)
 
 An advanced Azure-based laboratory designed to validate cloud resilience through automated fault injection. This project leverages **Infrastructure as Code (IaC)** to deploy a controlled environment where CPU saturation, network latency, and storage exhaustion are systematically simulated to test observability, alerting, and system stability.
 
@@ -64,7 +64,7 @@ The project follows a modular directory structure to ensure scalability and main
 
 ---
 
-## 🚀 Deployment
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -196,9 +196,18 @@ fallocate -l 25G chaos_disk_hog.img && sleep 60 && rm chaos_disk_hog.img
 
 ---
 
+## 🔐 Security Design
+
+- **IP-Restricted SSH** — NSG rule `AllowSSH` (priority 1001) limits inbound port 22 to a single admin IP. All other sources are implicitly denied by the default deny-all rule.
+- **NIC-Level Enforcement** — NSG is bound directly to the VM's network interface via `azurerm_network_interface_security_group_association`, ensuring rules apply regardless of subnet policy changes.
+- **Key-Based Authentication** — Password authentication is disabled; SSH access requires an ED25519 key pair injected at provisioning time via `admin_ssh_key`.
+- **Minimal Exposure** — Only port 22 is opened. No HTTP/HTTPS ports are exposed — the VM is a controlled internal test target, not a public service.
+
+---
+
 ## 🧩 Challenges & Solutions
 
-| Challenge | Description | Resolution |
+| Issue | Cause | Solution |
 |:---|:---|:---|
 | **SkuNotAvailable** | 409 Conflict encountered for the `Standard_B1ms` VM size in `westeurope`. | Pivoted to `Standard_B1s` in `germanywestcentral` — a single variable change in Terraform triggered a full regional redeploy. |
 | **Regional Capacity Constraint** | Insufficient capacity in `westeurope` blocked the initial deployment entirely. | Migrated to `germanywestcentral`; Terraform forced a NIC replacement due to the region change, completing cleanly with 2 added, 1 changed. |
